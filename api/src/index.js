@@ -1,6 +1,12 @@
 import redis from 'redis'
 import connect from '../src/db'
 import express from 'express'
+import { json, urlencoded } from 'body-parser'
+import morgan from 'morgan'
+import cors from 'cors'
+import path from 'path'
+import userRoutes from '../src/resources/user/user.router'
+
 
 
 
@@ -20,6 +26,12 @@ client.on('error', (err) => {
 // init express server and mongo server
 const PORT = 8000
 const app = express();
+app.use(json())
+app.use(cors())
+app.use(morgan('dev'))
+app.use(urlencoded({ extended: true }))
+app.use('/api', userRoutes)
+
 
 connect()
     .then(() => {
