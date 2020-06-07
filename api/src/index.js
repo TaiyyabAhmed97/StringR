@@ -6,6 +6,7 @@ import morgan from 'morgan'
 import cors from 'cors'
 import path from 'path'
 import userRoutes from '../src/resources/user/user.router'
+import stringJobRoutes from '../src/resources/stringjob/stringjob.router'
 
 
 
@@ -13,7 +14,8 @@ import userRoutes from '../src/resources/user/user.router'
 
 /**
  * @initialize redis client
- */
+
+    #TODO: use redis when needed for caching
 
 let client = redis.createClient()
 client.on('connect', () => {
@@ -22,7 +24,7 @@ client.on('connect', () => {
 client.on('error', (err) => {
     console.log(' Redis client  not connected')
 })
-
+ */
 // init express server and mongo server
 const PORT = 8000
 const app = express();
@@ -31,6 +33,7 @@ app.use(cors())
 app.use(morgan('dev'))
 app.use(urlencoded({ extended: true }))
 app.use('/api', userRoutes)
+app.use('/api', stringJobRoutes)
 
 
 connect()
