@@ -1,9 +1,12 @@
-# TO-DO tasks for FE and BE
+# StringR
+    Restringing racket monitoring WebApp written in Node.js and React
 
-## FE
+## TO-DO tasks for FE and BE
+
+### FE
  * Import and setup React Router
  * Setup Boilerplate code for dashboard component
  and stringingForm component
 
-## BE
+### BE
  * implement basic user auth
