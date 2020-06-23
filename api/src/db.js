@@ -1,10 +1,11 @@
-import mongoose from 'mongoose'
+import mongoose from "mongoose";
 
-const dbName = 'dev';
+const dbName = "dev";
 
-const connect = url => {
-    return mongoose.connect(url || `mongodb://127.0.0.1:27017/${dbName}`, {
-        useNewUrlParser: true
-    })
+const connect = (url) => {
+  return mongoose.connect(url || `mongodb://127.0.0.1:27017/${dbName}`, {
+    useNewUrlParser: true,
+    useUnifiedTopology: true,
+  });
 };
 export default connect;
