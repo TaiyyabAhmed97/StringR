@@ -7,12 +7,14 @@ let rst = new Schema(
     racket: {
       type: String,
     },
-    strings: [
-      {
-        string: String,
-        tension: Number,
-      },
-    ],
+    mains: {
+      string: String,
+      tension: Number,
+    },
+    crosses: {
+      string: String,
+      tension: Number,
+    },
   },
   { _id: false }
 );
