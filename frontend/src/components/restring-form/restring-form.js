@@ -7,11 +7,19 @@ export default class RestringForm extends Component {
   constructor(props) {
     super(props);
 
-    this.state = { name: "", phoneNumber: "", dueDate: new Date() };
+    this.state = {
+      name: "",
+      phoneNumber: "",
+      dueDate: new Date(),
+      rst: [{ racket: "", strings: [{ string: "", tension: 0 }] }],
+    };
 
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
     this.handleDateChange = this.handleDateChange.bind(this);
+    this.rstFormField = this.rstFormField.bind(this);
+    this.addRst = this.addRst.bind(this);
+    this.removeRst = this.removeRst.bind(this);
   }
 
   handleSubmit(e) {
@@ -37,11 +45,16 @@ export default class RestringForm extends Component {
       dueDate: date,
     });
   }
+  addRst() {}
+  removeRst() {}
+  rstFormField() {
+    const rstItems = this.state.rst.map((val, idx) => {});
+  }
 
   render() {
     return (
       <div>
-        <form onSubmit={this.handleSubmit}>
+        <form>
           <div className="field">
             <label className="label">Name</label>
             <div className="control">
@@ -81,9 +94,24 @@ export default class RestringForm extends Component {
 
           <div className="field">
             <p className="control">
-              <button className="button is-success">Login</button>
+              <button
+                type="button"
+                onClick={this.handleSubmit}
+                className="button is-success"
+              >
+                Submit
+              </button>
             </p>
           </div>
+
+          <div onClick={this.addRst} className="field">
+            <p className="control">
+              <button type="button" className="button is-primary">
+                Add Racket
+              </button>
+            </p>
+          </div>
+          <pre>{JSON.stringify(this.state, null, 2)} </pre>
         </form>
       </div>
     );
