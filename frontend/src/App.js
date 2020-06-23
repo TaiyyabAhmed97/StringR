@@ -14,7 +14,7 @@ export default function App() {
   return (
     <>
       <div className="root">
-        <h1 className="title">Bulma</h1>
+        <h1 className="title">Strings Attached Restringing Application</h1>
         <p className="subtitle">
           Modern CSS framework based on{" "}
           <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox">
