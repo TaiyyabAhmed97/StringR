@@ -41,3 +41,16 @@
 ### BE
 
 - implement basic user auth (still need to do)
+
+## TO-DO tasks for FE and BE (06-25/26-2020)
+
+### FE
+
+- Test form submission for successful DB insert
+- Style (racket, string, tension)rst fields to make ui more usable
+- Begin thinking about dashboard component?/entry user flow (first user -> new customer form, existing user -> lookup page -> restringing form page)
+- Import and setup React Router (still need to do)
+
+### BE
+
+- implement basic user auth (still need to do)
