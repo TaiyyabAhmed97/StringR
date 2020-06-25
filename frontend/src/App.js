@@ -1,9 +1,10 @@
 import React from "react";
-import logo from "./logo.svg";
+import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
 import "./App.sass";
 import { useForm } from "react-hook-form";
 import RestringForm from "./components/restring-form/restring-form";
+import NewUserForm from "./components/new-user-form/new-user-form";
 
 export default function App() {
   const { register, handleSubmit } = useForm();
@@ -15,13 +16,16 @@ export default function App() {
     <>
       <div className="root">
         <h1 className="title">Strings Attached Restringing Application</h1>
-        <p className="subtitle">
-          Modern CSS framework based on{" "}
-          <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout/Basic_Concepts_of_Flexbox">
-            Flexbox
-          </a>
-        </p>
-        <RestringForm></RestringForm>
+        <Router>
+          <Switch>
+            <Route path="/restring">
+              <RestringForm></RestringForm>
+            </Route>
+            <Route path="/">
+              <NewUserForm></NewUserForm>
+            </Route>
+          </Switch>
+        </Router>
       </div>
     </>
   );
