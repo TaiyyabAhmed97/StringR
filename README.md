@@ -54,3 +54,14 @@
 ### BE
 
 - implement basic user auth (still need to do)
+
+## TO-DO tasks for FE and BE (06-26-2020)
+
+### FE
+
+- Style (racket, string, tension)rst fields to make ui more usable
+- Begin thinking about dashboard component?/entry user flow (first user -> new customer form, existing user -> lookup page -> restringing form page)
+
+### BE
+
+- implement basic user auth (still need to do)
