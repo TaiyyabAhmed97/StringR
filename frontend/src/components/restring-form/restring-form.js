@@ -2,8 +2,9 @@ import React, { Component } from "react";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "../restring-form/restring-form.css";
+import { withRouter } from "react-router-dom";
 
-export default class RestringForm extends Component {
+class RestringForm extends Component {
   constructor(props) {
     super(props);
 
@@ -29,7 +30,9 @@ export default class RestringForm extends Component {
     this.handleRstChange = this.handleRstChange.bind(this);
     this.helper = this.helper.bind(this);
   }
-
+  componentDidMount() {
+    console.log(this.props);
+  }
   handleSubmit(e) {
     this.setState(
       {
@@ -247,3 +250,4 @@ export default class RestringForm extends Component {
     );
   }
 }
+export default withRouter(RestringForm);

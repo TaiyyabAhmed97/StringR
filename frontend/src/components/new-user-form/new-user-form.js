@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import axios from "axios";
 import "./new-user-form.css";
-export default class NewUserForm extends Component {
+import { Router, withRouter } from "react-router-dom";
+class NewUserForm extends Component {
   constructor(props) {
     super(props);
 
@@ -30,6 +31,8 @@ export default class NewUserForm extends Component {
       })
       .then((res) => {
         console.log(res);
+        console.log(this.props);
+        this.props.history.push("/restring", this.state);
       })
       .catch((e) => {
         console.log(e);
@@ -99,3 +102,4 @@ export default class NewUserForm extends Component {
     );
   }
 }
+export default withRouter(NewUserForm);
