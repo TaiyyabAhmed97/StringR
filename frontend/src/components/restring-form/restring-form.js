@@ -9,6 +9,7 @@ class RestringForm extends Component {
     super(props);
 
     this.state = {
+      userId: "",
       name: "",
       phoneNumber: "",
       dueDate: new Date(),
@@ -29,9 +30,17 @@ class RestringForm extends Component {
     this.removeRst = this.removeRst.bind(this);
     this.handleRstChange = this.handleRstChange.bind(this);
     this.helper = this.helper.bind(this);
+    this.getFullName = this.getFullName.bind(this);
   }
+  getFullName() {}
   componentDidMount() {
     console.log(this.props);
+    let userName =
+      this.props.location.state.fname + " " + this.props.location.state.lname;
+    this.setState({
+      name: userName,
+      phoneNumber: this.props.location.state.phoneNumber,
+    });
   }
   handleSubmit(e) {
     this.setState(
@@ -52,7 +61,6 @@ class RestringForm extends Component {
     });
   }
   helper(obj, prop, val) {
-    console.log(prop);
     switch (prop) {
       case "racket":
         obj.racket = val;
@@ -187,31 +195,36 @@ class RestringForm extends Component {
           <b>New Restring Form </b>
         </p>
         <form>
-          <div className="field">
-            <label className="label">Name</label>
-            <div className="control">
-              <input
-                className="input"
-                type="text"
-                name="name"
-                placeholder="e.g Alex Smith"
-                onChange={this.handleChange}
-              />
+          <fieldset disabled>
+            <div className="field">
+              <label className="label">Name</label>
+              <div className="control">
+                <input
+                  readOnly
+                  className="input"
+                  type="text"
+                  name="name"
+                  value={this.state.name}
+                  placeholder="e.g Alex Smith"
+                />
+              </div>
             </div>
-          </div>
 
-          <div className="field">
-            <label className="label">Phone Number</label>
-            <div className="control">
-              <input
-                className="input"
-                type="text"
-                name="phoneNumber"
-                placeholder="e.g. 773-712-8894"
-                onChange={this.handleChange}
-              />
+            <div className="field">
+              <label className="label">Phone Number</label>
+              <div className="control">
+                <input
+                  readOnly
+                  className="input"
+                  type="text"
+                  name="phoneNumber"
+                  value={this.state.phoneNumber}
+                  placeholder="e.g. 773-712-8894"
+                />
+              </div>
             </div>
-          </div>
+          </fieldset>
+
           <div className="field">
             <label className="label">Due Date</label>
             <div className="control">

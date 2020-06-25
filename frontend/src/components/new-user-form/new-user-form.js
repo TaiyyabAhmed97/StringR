@@ -32,7 +32,10 @@ class NewUserForm extends Component {
       .then((res) => {
         console.log(res);
         console.log(this.props);
-        this.props.history.push("/restring", this.state);
+        this.props.history.push("/restring", {
+          ...this.state,
+          userId: res.data.data._id,
+        });
       })
       .catch((e) => {
         console.log(e);
