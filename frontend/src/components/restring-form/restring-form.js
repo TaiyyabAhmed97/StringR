@@ -180,6 +180,9 @@ export default class RestringForm extends Component {
   render() {
     return (
       <div>
+        <p className="subtitle">
+          <b>New Restring Form </b>
+        </p>
         <form>
           <div className="field">
             <label className="label">Name</label>
