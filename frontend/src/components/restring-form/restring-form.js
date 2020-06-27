@@ -3,6 +3,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "../restring-form/restring-form.css";
 import { withRouter } from "react-router-dom";
+import axios from "axios";
 
 class RestringForm extends Component {
   constructor(props) {
@@ -10,7 +11,8 @@ class RestringForm extends Component {
 
     this.state = {
       userId: "",
-      name: "",
+      firstName: "",
+      lastName: "",
       phoneNumber: "",
       dueDate: new Date(),
       rst: [
@@ -30,28 +32,32 @@ class RestringForm extends Component {
     this.removeRst = this.removeRst.bind(this);
     this.handleRstChange = this.handleRstChange.bind(this);
     this.helper = this.helper.bind(this);
-    this.getFullName = this.getFullName.bind(this);
+    //this.getFullName = this.getFullName.bind(this);
   }
-  getFullName() {}
   componentDidMount() {
-    console.log(this.props);
-    let userName =
-      this.props.location.state.fname + " " + this.props.location.state.lname;
+    console.log(this.props.location.state);
     this.setState({
-      name: userName,
+      userId: this.props.location.state.userId,
+      firstName: this.props.location.state.fname,
+      lastName: this.props.location.state.lname,
       phoneNumber: this.props.location.state.phoneNumber,
     });
   }
   handleSubmit(e) {
-    this.setState(
-      {
-        currentDate: new Date(),
-      },
-      () => {
-        console.log(this.state);
-      }
-    );
-
+    let { userId, currentDate, dueDate, rst } = this.state;
+    axios
+      .post("http://localhost:8000/api/stringjob", {
+        userId,
+        dueDate,
+        rst,
+        currentDate,
+      })
+      .then((res) => {
+        console.log(res);
+      })
+      .catch((e) => {
+        console.log(e);
+      });
     e.preventDefault();
   }
   handleChange(e) {
@@ -189,6 +195,7 @@ class RestringForm extends Component {
   }
 
   render() {
+    let name = this.state.firstName + " " + this.state.lastName;
     return (
       <div>
         <p className="subtitle">
@@ -204,7 +211,7 @@ class RestringForm extends Component {
                   className="input"
                   type="text"
                   name="name"
-                  value={this.state.name}
+                  value={name}
                   placeholder="e.g Alex Smith"
                 />
               </div>
@@ -237,7 +244,8 @@ class RestringForm extends Component {
             </div>
           </div>
 
-          <div className="field">
+          {this.rstFormField()}
+          <div className="field is-grouped groups">
             <p className="control">
               <button
                 type="button"
@@ -247,16 +255,18 @@ class RestringForm extends Component {
                 Submit
               </button>
             </p>
-          </div>
-          {this.rstFormField()}
 
-          <div onClick={this.addRst} className="field">
-            <p className="control">
-              <button type="button" className="button is-primary">
+            <p className="control addRacket">
+              <button
+                type="button"
+                onClick={this.addRst}
+                className="button is-primary"
+              >
                 Add Racket
               </button>
             </p>
           </div>
+
           <pre>{JSON.stringify(this.state, null, 2)} </pre>
         </form>
       </div>
