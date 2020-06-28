@@ -77,7 +77,7 @@
 
 - implement basic user auth (still need to do)
 
-## TO-DO tasks for FE and BE (06-28-2020)
+## TO-DO tasks for FE and BE (06-29-2020)
 
 ### FE
 
