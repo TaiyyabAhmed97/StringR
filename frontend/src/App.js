@@ -2,16 +2,11 @@ import React from "react";
 import { BrowserRouter as Router, Switch, Route, Link } from "react-router-dom";
 import "./App.css";
 import "./App.sass";
-import { useForm } from "react-hook-form";
 import RestringForm from "./components/restring-form/restring-form";
 import NewUserForm from "./components/new-user-form/new-user-form";
+import Dashboard from "./components/dashboard/dashboard";
 
 export default function App() {
-  const { register, handleSubmit } = useForm();
-
-  const onSubmit = (data) => {
-    console.log(data);
-  };
   return (
     <>
       <div className="root">
@@ -20,6 +15,9 @@ export default function App() {
           <Switch>
             <Route path="/restring">
               <RestringForm></RestringForm>
+            </Route>
+            <Route path="/dashboard">
+              <Dashboard></Dashboard>
             </Route>
             <Route path="/">
               <NewUserForm></NewUserForm>
