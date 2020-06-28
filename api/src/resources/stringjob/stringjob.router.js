@@ -1,13 +1,15 @@
-import { Router } from 'express'
+import { Router } from "express";
 import {
-    getStringJob,
-    createStringJob
-} from './stringjob.controller'
+  getStringJob,
+  createStringJob,
+  getNotDoneStringJobs,
+  getDoneStringJobs,
+} from "./stringjob.controller";
 const router = Router();
 
-router.route('/stringjob')
-    .post(createStringJob)
-router.route('/stringjob/:id')
-    .get(getStringJob)
+router.route("/stringjob").post(createStringJob);
+router.route("/stringjob/done").get(getDoneStringJobs);
+router.route("/stringjob/notdone").get(getNotDoneStringJobs);
+router.route("/stringjob/:id").get(getStringJob);
 
-export default router
+export default router;
