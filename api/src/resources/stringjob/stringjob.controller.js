@@ -17,6 +17,20 @@ export const getStringJob = async (req, res) => {
   }
 };
 
+export const getAll = async (req, res) => {
+  try {
+    let sJobs = await StringJob.find();
+    if (!sJobs) {
+      console.log("error in retrieving all string jobs");
+      return res.status(400).send({ error: "could not GET all string jobs" });
+    }
+    return res.status(201).send({ data: sJobs });
+  } catch (e) {
+    console.error(e);
+    return res.status(400).send({ error: e });
+  }
+};
+
 export const getDoneStringJobs = async (req, res) => {
   try {
     let sJobs = await StringJob.find({ status: "DONE" });
