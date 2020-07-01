@@ -30,11 +30,9 @@ class NewUserForm extends Component {
         phoneNumber: this.state.phoneNumber,
       })
       .then((res) => {
-        console.log(res);
-        console.log(this.props);
         this.props.history.push("/restring", {
           ...this.state,
-          userId: res.data.data._id,
+          user: res.data.data._id,
         });
       })
       .catch((e) => {

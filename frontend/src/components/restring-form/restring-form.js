@@ -10,7 +10,7 @@ class RestringForm extends Component {
     super(props);
 
     this.state = {
-      userId: "",
+      user: "",
       firstName: "",
       lastName: "",
       phoneNumber: "",
@@ -37,27 +37,25 @@ class RestringForm extends Component {
   componentDidMount() {
     console.log(this.props.location.state);
     this.setState({
-      userId: this.props.location.state.userId,
+      user: this.props.location.state.user,
       firstName: this.props.location.state.fname,
       lastName: this.props.location.state.lname,
       phoneNumber: this.props.location.state.phoneNumber,
     });
   }
   handleSubmit(e) {
-    let { userId, currentDate, dueDate, rst } = this.state;
+    let { user, currentDate, dueDate, rst } = this.state;
     axios
       .post("http://localhost:8000/api/stringjob", {
-        userId,
+        user,
         dueDate,
         rst,
         currentDate,
       })
       .then((res) => {
-        console.log(res);
+        this.props.history.push("/dashboard");
       })
-      .catch((e) => {
-        console.log(e);
-      });
+      .catch((e) => {});
     e.preventDefault();
   }
   handleChange(e) {
