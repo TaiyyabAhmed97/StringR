@@ -1,4 +1,5 @@
 import mongoose from "mongoose";
+import { User } from "../user/user.model";
 
 const Schema = mongoose.Schema;
 
@@ -20,7 +21,7 @@ let rst = new Schema(
 );
 
 let stringjob = new Schema({
-  userId: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: "user",
   },

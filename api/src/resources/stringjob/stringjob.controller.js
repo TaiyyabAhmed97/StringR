@@ -3,7 +3,7 @@ import { User } from "../user/user.model";
 
 export const getStringJob = async (req, res) => {
   try {
-    let stringJob = await StringJob.findById(req.params.id);
+    let stringJob = await StringJob.findById(req.params.id).populate("user");
     if (!stringJob) {
       console.log("could not find user");
       return res
@@ -19,7 +19,7 @@ export const getStringJob = async (req, res) => {
 
 export const getAll = async (req, res) => {
   try {
-    let sJobs = await StringJob.find();
+    let sJobs = await StringJob.find().populate("user");
     if (!sJobs) {
       console.log("error in retrieving all string jobs");
       return res.status(400).send({ error: "could not GET all string jobs" });
@@ -64,7 +64,7 @@ export const getNotDoneStringJobs = async (req, res) => {
 
 export const createStringJob = async (req, res) => {
   try {
-    let user = await User.findById(req.body.userId);
+    let user = await User.findById(req.body.user);
     if (!user) {
       return res.status(400).send({ error: "could not find user" });
     }
