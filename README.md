@@ -90,3 +90,17 @@
 
 - think through paginated fetch for every (x (need to determine what x will be)) number of stirng jobs to show in dashboard component
 - implement basic user auth (still need to do)
+
+## TO-DO tasks for FE and BE (07-02-2020)
+
+### FE
+
+- Style Card CSS elemnt to dashboard components and begin adding string job data and styling it
+- Begin work on edit string job component (as the "mark a string job as "DONE" page)
+- Style (racket, string, tension)rst fields to make ui more usable
+- Begin thinking about dashboard component?/entry user flow (first user -> new customer form, existing user -> lookup page -> restringing form page)
+
+### BE
+
+- think through paginated fetch for every (x (need to determine what x will be)) number of stirng jobs to show in dashboard component
+- implement basic user auth (still need to do)
