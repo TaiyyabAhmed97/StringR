@@ -88,9 +88,9 @@ class RestringForm extends Component {
     const name = e.target.name;
     let rstItems = [...this.state.rst];
 
-    let temp = { ...rstItems[idx] };
+    let rstItem = { ...rstItems[idx] };
 
-    rstItems[idx] = this.helper(temp, name, e.target.value);
+    rstItems[idx] = this.helper(rstItem, name, e.target.value);
     this.setState({
       rst: [...rstItems],
     });
