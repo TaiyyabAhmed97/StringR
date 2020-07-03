@@ -22,7 +22,10 @@ class Dashboard extends Component {
   rstFields() {}
   stringJobCards() {
     const sJobs = this.state.stringjobs.map((obj, idx) => {
-      console.log(obj);
+      let date = new Date(obj.dueDate);
+      date = date.toDateString();
+      const status = obj.status;
+      const statusClass = status == "NOT DONE" ? "notdone" : " done";
       const title = obj.rst.length > 1 ? "Rackets" : "Racket";
       const rsts = obj.rst.map((rst, idx) => {
         return (
@@ -53,11 +56,14 @@ class Dashboard extends Component {
                   Name: {obj.user.firstName + " " + obj.user.lastName}
                 </p>
                 <p className="">Phone Number: {obj.user.phoneNumber}</p>
-                <p className="">Due At: {obj.dueDate}</p>
+                <p className="">Due At: {date}</p>
               </div>
             </div>
             <div className="column">
               <h3 class="title is-3">{title} Info</h3>
+              <h2 class="subtitle restringStatus">
+                Restring Status: <b className={statusClass}>{status}</b>
+              </h2>
               {rsts}
             </div>
           </div>
@@ -71,7 +77,12 @@ class Dashboard extends Component {
     if (this.state.stringjobs.length == 0) {
       return null;
     } else {
-      return <div>{this.stringJobCards()}</div>;
+      return (
+        <div>
+          {this.stringJobCards()}
+          <pre>{JSON.stringify(this.state, null, 2)}</pre>
+        </div>
+      );
     }
   }
 }
