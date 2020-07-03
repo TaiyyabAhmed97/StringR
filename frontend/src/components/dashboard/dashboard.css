@@ -1,3 +1,20 @@
 .stringJobCard {
   margin: 20px auto 20px auto;
 }
+ul {
+  padding-left: 35px;
+  list-style-type: disclosure-closed;
+}
+
+b {
+  font-weight: bold;
+}
+
+p {
+  font-size: 20px;
+  padding-top: 3px;
+  padding-bottom: 3px;
+}
+li {
+  font-size: 20px;
+}

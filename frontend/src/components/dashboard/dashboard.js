@@ -22,38 +22,44 @@ class Dashboard extends Component {
   rstFields() {}
   stringJobCards() {
     const sJobs = this.state.stringjobs.map((obj, idx) => {
+      console.log(obj);
+      const title = obj.rst.length > 1 ? "Rackets" : "Racket";
       const rsts = obj.rst.map((rst, idx) => {
         return (
           <div key={idx}>
             <p>
-              {idx}
+              {idx + 1}
               {". "}
-              {rst.racket +
-                " " +
-                "mains: " +
-                rst.mains.string +
-                " at " +
-                rst.mains.tension +
-                "lbs" +
-                "\n" +
-                "crosses: " +
-                rst.crosses.string +
-                " at " +
-                rst.crosses.tension +
-                "lbs"}
+              {rst.racket}
             </p>
+            <ul>
+              <li>
+                mains: {rst.mains.string} @ <b>{rst.mains.tension} lbs</b>
+              </li>
+              <li>
+                crosses: {rst.crosses.string} @ <b>{rst.crosses.tension} lbs</b>
+              </li>
+            </ul>
           </div>
         );
       });
       return (
         <div key={idx}>
-          <div className="box stringJobCard">
-            <p>
-              Customer: {obj.user.firstName + " " + obj.user.lastName}
-              <br></br>
-              Due At: {obj.dueDate}
-            </p>
-            <div>{rsts}</div>
+          <div className="box stringJobCard columns">
+            <div className="column">
+              <h3 class="title is-3">Customer Info</h3>
+              <div>
+                <p className="">
+                  Name: {obj.user.firstName + " " + obj.user.lastName}
+                </p>
+                <p className="">Phone Number: {obj.user.phoneNumber}</p>
+                <p className="">Due At: {obj.dueDate}</p>
+              </div>
+            </div>
+            <div className="column">
+              <h3 class="title is-3">{title} Info</h3>
+              {rsts}
+            </div>
           </div>
         </div>
       );
@@ -65,12 +71,7 @@ class Dashboard extends Component {
     if (this.state.stringjobs.length == 0) {
       return null;
     } else {
-      return (
-        <div>
-          {this.stringJobCards()}
-          <pre>{JSON.stringify(this.state, null, 2)} </pre>
-        </div>
-      );
+      return <div>{this.stringJobCards()}</div>;
     }
   }
 }
