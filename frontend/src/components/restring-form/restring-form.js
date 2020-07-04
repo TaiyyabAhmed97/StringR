@@ -32,6 +32,7 @@ class RestringForm extends Component {
     this.removeRst = this.removeRst.bind(this);
     this.handleRstChange = this.handleRstChange.bind(this);
     this.helper = this.helper.bind(this);
+    this.handleCancel = this.handleCancel.bind(this);
     //this.getFullName = this.getFullName.bind(this);
   }
   componentDidMount() {
@@ -44,19 +45,22 @@ class RestringForm extends Component {
     });
   }
   handleSubmit(e) {
-    let { user, currentDate, dueDate, rst } = this.state;
+    let { user, dropOffDate, dueDate, rst } = this.state;
     axios
       .post("http://localhost:8000/api/stringjob", {
         user,
         dueDate,
         rst,
-        currentDate,
+        dropOffDate,
       })
       .then((res) => {
         this.props.history.push("/dashboard");
       })
       .catch((e) => {});
     e.preventDefault();
+  }
+  handleCancel() {
+    this.props.history.push("/dashboard");
   }
   handleChange(e) {
     const name = e.target.name;
@@ -122,9 +126,9 @@ class RestringForm extends Component {
   rstFormField() {
     const rstItems = this.state.rst.map((rst, idx) => {
       return (
-        <div key={idx}>
+        <div key={idx} className="rstbox">
           <div className="field">
-            <label className="label">Racket</label>
+            <label className="label">Racket {idx + 1}</label>
             <div className="control">
               <input
                 className="input"
@@ -135,28 +139,35 @@ class RestringForm extends Component {
                 onChange={(e) => this.handleRstChange(e, idx)}
               />
             </div>
-            <p className="label">Mains String</p>
-            <div className="control">
-              <input
-                className="input"
-                type="text"
-                value={rst.mains.string}
-                name="mains.string"
-                placeholder="RPM Blast"
-                onChange={(e) => this.handleRstChange(e, idx)}
-              />
+            <div className="field-body">
+              <div className="field">
+                <p className="label">Mains String</p>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    value={rst.mains.string}
+                    name="mains.string"
+                    placeholder="RPM Blast"
+                    onChange={(e) => this.handleRstChange(e, idx)}
+                  />
+                </div>
+              </div>
+              <div className="field">
+                <p className="label">Crosses String</p>
+                <div className="control">
+                  <input
+                    className="input"
+                    type="text"
+                    value={rst.crosses.string}
+                    name="crosses.string"
+                    placeholder="Wilson NXT"
+                    onChange={(e) => this.handleRstChange(e, idx)}
+                  />
+                </div>
+              </div>
             </div>
-            <p className="label">Crosses String</p>
-            <div className="control">
-              <input
-                className="input"
-                type="text"
-                value={rst.crosses.string}
-                name="crosses.string"
-                placeholder="Wilson NXT"
-                onChange={(e) => this.handleRstChange(e, idx)}
-              />
-            </div>
+
             <div className="field-body">
               <div className="field">
                 <label className="label">Main's Tension</label>
@@ -243,7 +254,7 @@ class RestringForm extends Component {
           </div>
 
           {this.rstFormField()}
-          <div className="field is-grouped groups">
+          <div className="field is-grouped">
             <p className="control">
               <button
                 type="button"
@@ -263,9 +274,16 @@ class RestringForm extends Component {
                 Add Racket
               </button>
             </p>
+            <p className="control cancel">
+              <button
+                type="button"
+                onClick={this.handleCancel}
+                className="button is-danger"
+              >
+                Cancel
+              </button>
+            </p>
           </div>
-
-          <pre>{JSON.stringify(this.state, null, 2)} </pre>
         </form>
       </div>
     );

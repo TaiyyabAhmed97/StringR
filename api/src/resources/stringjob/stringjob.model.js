@@ -28,7 +28,7 @@ let stringjob = new Schema({
   dueDate: {
     type: Date,
   },
-  currentDate: {
+  dropOffDate: {
     type: Date,
     default: new Date(),
   },

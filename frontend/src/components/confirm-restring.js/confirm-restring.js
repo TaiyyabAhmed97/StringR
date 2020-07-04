@@ -17,7 +17,7 @@ class ConfirmRestring extends Component {
         phoneNumber: "",
       },
       status: "",
-      currentDate: "",
+      dropOffDate: "",
       dueDate: new Date(),
       rst: [
         {
@@ -42,7 +42,7 @@ class ConfirmRestring extends Component {
       user: passedState.user,
       status: passedState.status,
       dueDate: passedState.dueDate,
-      createdAt: passedState.currentDate,
+      createdAt: passedState.dropOffDate,
       rst: [...passedState.rst],
     });
   }
@@ -144,7 +144,7 @@ class ConfirmRestring extends Component {
   render() {
     let name = this.state.user.firstName + " " + this.state.user.lastName;
     let dueDate = new Date(this.state.dueDate);
-    let createdAt = new Date(this.state.currentDate);
+    let createdAt = new Date(this.state.dropOffDate);
     let dateString = `${dueDate.getMonth()}/${dueDate.getDate()}/${dueDate.getFullYear()}`;
     return (
       <div>
