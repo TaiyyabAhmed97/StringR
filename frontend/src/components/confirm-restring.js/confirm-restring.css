@@ -1,0 +1,16 @@
+.react-datepicker__input-container input {
+  display: block;
+  width: 100%;
+  border: 2px solid #dadada;
+  border-radius: 7px;
+  height: 40px;
+  font-size: 15px;
+  padding-left: 10px;
+}
+
+.groups {
+  padding-top: 10px;
+}
+.addRacket {
+  padding-left: 260px;
+}

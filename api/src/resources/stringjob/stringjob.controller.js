@@ -62,6 +62,24 @@ export const getNotDoneStringJobs = async (req, res) => {
   }
 };
 
+export const completeStringJob = async (req, res) => {
+  try {
+    let sJob = await StringJob.findById(req.body.id);
+    if (!sJob) {
+      console.log("error in marking stringjob as complete");
+      return res
+        .status(400)
+        .send({ error: "error in marking stringjob as complete" });
+    }
+    sJob.status = "DONE";
+    sJob.save();
+    return res.status(200).send({ data: sJob });
+  } catch (e) {
+    console.error(e);
+    return res.status(400).send({ error: e });
+  }
+};
+
 export const createStringJob = async (req, res) => {
   try {
     let user = await User.findById(req.body.user);

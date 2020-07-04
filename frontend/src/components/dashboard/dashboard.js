@@ -10,6 +10,7 @@ class Dashboard extends Component {
       stringjobs: [],
     };
     this.stringJobCards = this.stringJobCards.bind(this);
+    this.handleOnClick = this.handleOnClick.bind(this);
   }
   componentDidMount() {
     axios.get("http://localhost:8000/api/stringjob").then((res) => {
@@ -19,7 +20,11 @@ class Dashboard extends Component {
     });
   }
 
-  rstFields() {}
+  handleOnClick(e, idx) {
+    this.props.history.push("/confirm", {
+      ...this.state.stringjobs[idx],
+    });
+  }
   stringJobCards() {
     const sJobs = this.state.stringjobs.map((obj, idx) => {
       let date = new Date(obj.dueDate);
@@ -47,10 +52,10 @@ class Dashboard extends Component {
         );
       });
       return (
-        <div key={idx}>
+        <div key={idx} onClick={(e) => this.handleOnClick(e, idx)}>
           <div className="box stringJobCard columns">
             <div className="column">
-              <h3 class="title is-3">Customer Info</h3>
+              <h3 className="title is-3">Customer Info</h3>
               <div>
                 <p className="">
                   Name: {obj.user.firstName + " " + obj.user.lastName}
@@ -60,8 +65,8 @@ class Dashboard extends Component {
               </div>
             </div>
             <div className="column">
-              <h3 class="title is-3">{title} Info</h3>
-              <h2 class="subtitle restringStatus">
+              <h3 className="title is-3">{title} Info</h3>
+              <h2 className="subtitle restringStatus">
                 Restring Status: <b className={statusClass}>{status}</b>
               </h2>
               {rsts}

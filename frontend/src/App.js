@@ -5,6 +5,7 @@ import "./App.sass";
 import RestringForm from "./components/restring-form/restring-form";
 import NewUserForm from "./components/new-user-form/new-user-form";
 import Dashboard from "./components/dashboard/dashboard";
+import ConfirmRestring from "./components/confirm-restring.js/confirm-restring";
 
 export default function App() {
   return (
@@ -30,6 +31,9 @@ export default function App() {
               <Route path="/dashboard">
                 <Dashboard></Dashboard>
               </Route>
+              <Route path="/confirm">
+                <ConfirmRestring></ConfirmRestring>
+              </Route>
               <Route path="/">
                 <NewUserForm></NewUserForm>
               </Route>
@@ -37,10 +41,10 @@ export default function App() {
           </Router>
         </div>
       </section>
-      <section class="section">
-        <footer class="footer">
-          <div class="container">
-            <div class="content has-text-centered">
+      <section className="section">
+        <footer className="footer">
+          <div className="container">
+            <div className="content has-text-centered">
               <p>
                 <strong>Bulma</strong> by{" "}
                 <a href="https://jgthms.com">Jeremy Thomas</a>. The source code
