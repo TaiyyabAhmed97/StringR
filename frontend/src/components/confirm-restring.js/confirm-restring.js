@@ -66,76 +66,79 @@ class ConfirmRestring extends Component {
   rstFormField() {
     const rstItems = this.state.rst.map((rst, idx) => {
       return (
-        <div key={idx}>
-          <div className="field">
-            <label className="label">Racket</label>
-            <div className="control">
-              <input
-                readOnly
-                className="input"
-                type="text"
-                name="racket"
-                value={rst.racket}
-                placeholder="Wilson Pro Staff 97"
-                //onChange={(e) => this.handleRstChange(e, idx)}
-              />
-            </div>
-            <p className="label">Mains String</p>
-            <div className="control">
-              <input
-                readOnly
-                className="input"
-                type="text"
-                value={rst.mains.string}
-                name="mains.string"
-                placeholder="RPM Blast"
-                //onChange={(e) => this.handleRstChange(e, idx)}
-              />
-            </div>
-            <p className="label">Crosses String</p>
-            <div className="control">
-              <input
-                readOnly
-                className="input"
-                type="text"
-                value={rst.crosses.string}
-                name="crosses.string"
-                placeholder="Wilson NXT"
-                //onChange={(e) => this.handleRstChange(e, idx)}
-              />
-            </div>
-            <div className="field-body">
-              <div className="field">
-                <label className="label">Main's Tension</label>
-                <div className="control">
-                  <input
-                    readOnly
-                    className="input"
-                    type="text"
-                    name="mains.tension"
-                    value={rst.mains.tension}
-                    placeholder="50"
-                    //onChange={(e) => this.handleRstChange(e, idx)}
-                  />
-                </div>
+        <>
+          <div key={idx} className="rstbox">
+            <div className="field">
+              <label className="label">Racket</label>
+              <div className="control">
+                <input
+                  readOnly
+                  className="input"
+                  type="text"
+                  name="racket"
+                  value={rst.racket}
+                  placeholder="Wilson Pro Staff 97"
+                  //onChange={(e) => this.handleRstChange(e, idx)}
+                />
               </div>
-              <div className="field">
-                <label className="label">Crosses Tension</label>
-                <div className="control">
-                  <input
-                    readOnly
-                    className="input"
-                    type="text"
-                    name="crosses.tension"
-                    value={rst.crosses.tension}
-                    placeholder="55"
-                    //onChange={(e) => this.handleRstChange(e, idx)}
-                  />
+              <p className="label">Mains String</p>
+              <div className="control">
+                <input
+                  readOnly
+                  className="input"
+                  type="text"
+                  value={rst.mains.string}
+                  name="mains.string"
+                  placeholder="RPM Blast"
+                  //onChange={(e) => this.handleRstChange(e, idx)}
+                />
+              </div>
+              <p className="label">Crosses String</p>
+              <div className="control">
+                <input
+                  readOnly
+                  className="input"
+                  type="text"
+                  value={rst.crosses.string}
+                  name="crosses.string"
+                  placeholder="Wilson NXT"
+                  //onChange={(e) => this.handleRstChange(e, idx)}
+                />
+              </div>
+              <div className="field-body">
+                <div className="field">
+                  <label className="label">Main's Tension</label>
+                  <div className="control">
+                    <input
+                      readOnly
+                      className="input"
+                      type="text"
+                      name="mains.tension"
+                      value={rst.mains.tension}
+                      placeholder="50"
+                      //onChange={(e) => this.handleRstChange(e, idx)}
+                    />
+                  </div>
+                </div>
+                <div className="field">
+                  <label className="label">Crosses Tension</label>
+                  <div className="control">
+                    <input
+                      readOnly
+                      className="input"
+                      type="text"
+                      name="crosses.tension"
+                      value={rst.crosses.tension}
+                      placeholder="55"
+                      //onChange={(e) => this.handleRstChange(e, idx)}
+                    />
+                  </div>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+          <hr></hr>
+        </>
       );
     });
     return rstItems;
@@ -203,7 +206,7 @@ class ConfirmRestring extends Component {
                 onClick={this.handleSubmit}
                 className="button is-success"
               >
-                String Job Completed
+                Mark as finished
               </button>
             </p>
 
@@ -211,7 +214,7 @@ class ConfirmRestring extends Component {
               <button
                 type="button"
                 onClick={this.cancel}
-                className="button is-primary"
+                className="button is-danger"
               >
                 Cancel
               </button>

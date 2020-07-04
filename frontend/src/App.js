@@ -6,24 +6,14 @@ import RestringForm from "./components/restring-form/restring-form";
 import NewUserForm from "./components/new-user-form/new-user-form";
 import Dashboard from "./components/dashboard/dashboard";
 import ConfirmRestring from "./components/confirm-restring.js/confirm-restring";
-
+import Navbar from "./views/navbar/navbar";
 export default function App() {
   return (
     <>
-      <div>
-        <section className="hero is-primary">
-          <div className="hero-body">
-            <div className="container">
-              <h1 className="title">
-                Strings Attached Restringing Application
-              </h1>
-            </div>
-          </div>
-        </section>
-      </div>
-      <section className="section">
+      <Router>
+        <Navbar></Navbar>
         <div className="container">
-          <Router>
+          <section className="section">
             <Switch>
               <Route path="/restring">
                 <RestringForm></RestringForm>
@@ -38,9 +28,10 @@ export default function App() {
                 <NewUserForm></NewUserForm>
               </Route>
             </Switch>
-          </Router>
+          </section>
         </div>
-      </section>
+      </Router>
+
       <section className="section">
         <footer className="footer">
           <div className="container">
