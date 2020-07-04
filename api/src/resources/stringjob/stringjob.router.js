@@ -6,10 +6,12 @@ import {
   getDoneStringJobs,
   getAll,
   completeStringJob,
+  updateStringJob,
 } from "./stringjob.controller";
 const router = Router();
 
 router.route("/stringjob").post(createStringJob);
+router.route("/stringjob").put(updateStringJob);
 router.route("/stringjob").get(getAll);
 router.route("/stringjob/done").get(getDoneStringJobs);
 router.route("/stringjob/done").post(completeStringJob);

@@ -88,10 +88,22 @@ export const createStringJob = async (req, res) => {
     }
     let sJob = await StringJob.create(req.body);
     if (!sJob) {
-      return res.status(400).send({ error: "could not create transaction" });
+      return res.status(400).send({ error: "could not create string job" });
     }
     user.stringJobs.push(sJob._id);
     user.save();
+    return res.status(201).send({ data: sJob });
+  } catch (e) {
+    console.error(e);
+    return res.status(400).send({ error: e });
+  }
+};
+export const updateStringJob = async (req, res) => {
+  try {
+    let sJob = await StringJob.findByIdAndUpdate(req.body.id, req.body.sJob);
+    if (!sJob) {
+      return res.status(400).send({ error: "could not update stringjob" });
+    }
     return res.status(201).send({ data: sJob });
   } catch (e) {
     console.error(e);
