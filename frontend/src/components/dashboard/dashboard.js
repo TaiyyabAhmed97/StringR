@@ -52,7 +52,11 @@ class Dashboard extends Component {
         );
       });
       return (
-        <div key={idx} onClick={(e) => this.handleOnClick(e, idx)}>
+        <div
+          className="pointer"
+          key={idx}
+          onClick={(e) => this.handleOnClick(e, idx)}
+        >
           <div className="box stringJobCard columns">
             <div className="column">
               <h3 className="title is-3">Customer Info</h3>
