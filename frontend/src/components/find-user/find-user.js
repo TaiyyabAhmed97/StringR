@@ -24,13 +24,26 @@ class FindUserForm extends Component {
     axios
       .get("http://localhost:8000/api/user/" + this.state.phoneNumber)
       .then((res) => {
-        this.setState({
-          user: res.data.data,
-        });
+        this.setState(
+          {
+            user: res.data.data,
+          },
+          () => {
+            this.props.history.push("/restring", {
+              fname: this.state.user.firstName,
+              lname: this.state.user.lastName,
+              phoneNumber: this.state.phoneNumber,
+              user: this.state.user._id,
+            });
+          }
+        );
       })
       .catch((e) => {
+        this.props.history.push("/", {
+          phoneNumber: this.state.phoneNumber,
+        });
         console.log("no user found");
-        console.error(e);
+        //console.error(e);
       });
     e.preventDefault();
   }

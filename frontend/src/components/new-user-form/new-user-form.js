@@ -15,6 +15,13 @@ class NewUserForm extends Component {
     this.handleSubmit = this.handleSubmit.bind(this);
   }
 
+  componentDidMount() {
+    if (this.props.location.state) {
+      this.setState({
+        phoneNumber: this.props.location.state.phoneNumber,
+      });
+    }
+  }
   handleChange(e) {
     const name = e.target.name;
     this.setState({

@@ -37,7 +37,9 @@ class Navbar extends React.Component {
               New Customer Form
             </Link>
 
-            <a class="navbar-item">Documentation</a>
+            <Link class="navbar-item" to="/usersearch">
+              Find User
+            </Link>
 
             <div class="navbar-item has-dropdown is-hoverable">
               <a class="navbar-link">More</a>
