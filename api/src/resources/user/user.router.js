@@ -4,6 +4,6 @@ const router = Router();
 
 router.route("/users").post(createUser);
 router.route("/users/:id").get(getUser);
-router.route("/user").get(getUserByPhoneNum);
+router.route("/user/:phoneNumber").get(getUserByPhoneNum);
 
 export default router;

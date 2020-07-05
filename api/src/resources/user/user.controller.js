@@ -21,7 +21,7 @@ export const createUser = async (req, res) => {
     const user = await User.create(req.body);
     if (!user) {
       console.log("failed to create user");
-      return req.status(400).end();
+      return res.status(400).end();
     }
     return res.status(201).send({ data: user });
   } catch (e) {
@@ -32,10 +32,11 @@ export const createUser = async (req, res) => {
 
 export const getUserByPhoneNum = async (req, res) => {
   try {
-    const user = await User.findOne({ phoneNumber: req.body.phoneNumber });
+    console.log(req);
+    const user = await User.findOne({ phoneNumber: req.params.phoneNumber });
     if (!user) {
       console.log("incorrect phone number, no user found");
-      return req.status(400).end();
+      return res.status(400).end();
     }
     return res.status(201).send({ data: user });
   } catch (e) {
