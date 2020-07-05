@@ -33,9 +33,9 @@ class Navbar extends React.Component {
 
         <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start">
-            <a class="navbar-item">
-              <Link to="/">New Customer Form</Link>
-            </a>
+            <Link class="navbar-item" to="/">
+              New Customer Form
+            </Link>
 
             <a class="navbar-item">Documentation</a>
 
@@ -58,7 +58,7 @@ class Navbar extends React.Component {
                 <a class="button is-primary">
                   <strong>Sign up</strong>
                 </a>
-                <a class="button is-light">Log in</a>
+                <a class="button is-dark">Log in</a>
               </div>
             </div>
           </div>

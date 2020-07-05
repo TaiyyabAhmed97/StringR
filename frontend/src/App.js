@@ -7,6 +7,7 @@ import NewUserForm from "./components/new-user-form/new-user-form";
 import Dashboard from "./components/dashboard/dashboard";
 import ConfirmRestring from "./components/confirm-restring.js/confirm-restring";
 import Navbar from "./views/navbar/navbar";
+import FindUser from "./components/find-user/find-user";
 export default function App() {
   return (
     <>
@@ -15,6 +16,9 @@ export default function App() {
         <div className="container">
           <section className="section">
             <Switch>
+              <Route path="/usersearch">
+                <FindUser></FindUser>
+              </Route>
               <Route path="/restring">
                 <RestringForm></RestringForm>
               </Route>
