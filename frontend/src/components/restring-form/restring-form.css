@@ -21,3 +21,9 @@
 .cancel {
   padding-left: 260px;
 }
+hr {
+  background-color: black;
+}
+.removeRacket {
+  margin-top: 15px;
+}

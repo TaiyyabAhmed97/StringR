@@ -33,7 +33,8 @@ class RestringForm extends Component {
     this.handleRstChange = this.handleRstChange.bind(this);
     this.helper = this.helper.bind(this);
     this.handleCancel = this.handleCancel.bind(this);
-    //this.getFullName = this.getFullName.bind(this);
+    this.handleStringEnter = this.handleStringEnter.bind(this);
+    this.handleTensionEnter = this.handleTensionEnter.bind(this);
   }
   componentDidMount() {
     console.log(this.props.location.state);
@@ -44,6 +45,7 @@ class RestringForm extends Component {
       phoneNumber: this.props.location.state.phoneNumber,
     });
   }
+
   handleSubmit(e) {
     let { user, dropOffDate, dueDate, rst } = this.state;
     axios
@@ -99,6 +101,30 @@ class RestringForm extends Component {
       rst: [...rstItems],
     });
   }
+  handleStringEnter(e, idx) {
+    if (e.key === "Enter") {
+      const rstItems = [...this.state.rst];
+
+      let rstItem = { ...rstItems[idx] };
+      rstItem.crosses.string = rstItem.mains.string;
+      rstItems[idx] = rstItem;
+      this.setState({
+        rst: [...rstItems],
+      });
+    }
+  }
+  handleTensionEnter(e, idx) {
+    if (e.key === "Enter") {
+      const rstItems = [...this.state.rst];
+
+      let rstItem = { ...rstItems[idx] };
+      rstItem.crosses.tension = rstItem.mains.tension;
+      rstItems[idx] = rstItem;
+      this.setState({
+        rst: [...rstItems],
+      });
+    }
+  }
   handleDateChange(date) {
     this.setState({
       dueDate: date,
@@ -122,82 +148,101 @@ class RestringForm extends Component {
       rst: rstItems,
     });
   }
-  removeRst() {}
+  removeRst(idx) {
+    console.log(idx);
+    let rstItems = [...this.state.rst];
+    let moddedRstItems = rstItems.splice(idx, 1);
+    this.setState({ rst: [...moddedRstItems] });
+  }
   rstFormField() {
     const rstItems = this.state.rst.map((rst, idx) => {
       return (
-        <div key={idx} className="rstbox">
-          <div className="field">
-            <label className="label">Racket {idx + 1}</label>
-            <div className="control">
-              <input
-                className="input"
-                type="text"
-                name="racket"
-                value={rst.racket}
-                placeholder="Wilson Pro Staff 97"
-                onChange={(e) => this.handleRstChange(e, idx)}
-              />
-            </div>
-            <div className="field-body">
-              <div className="field">
-                <p className="label">Mains String</p>
-                <div className="control">
-                  <input
-                    className="input"
-                    type="text"
-                    value={rst.mains.string}
-                    name="mains.string"
-                    placeholder="RPM Blast"
-                    onChange={(e) => this.handleRstChange(e, idx)}
-                  />
+        <>
+          <div key={idx} className="rstbox">
+            <div className="field">
+              <label className="label">Racket {idx + 1}</label>
+              <div className="control">
+                <input
+                  className="input"
+                  type="text"
+                  name="racket"
+                  value={rst.racket}
+                  placeholder="Wilson Pro Staff 97"
+                  onChange={(e) => this.handleRstChange(e, idx)}
+                />
+              </div>
+              <div className="field-body">
+                <div className="field">
+                  <p className="label">Mains String</p>
+                  <div className="control">
+                    <input
+                      className="input"
+                      type="text"
+                      value={rst.mains.string}
+                      name="mains.string"
+                      placeholder="RPM Blast"
+                      onChange={(e) => this.handleRstChange(e, idx)}
+                      onKeyDown={(e) => this.handleStringEnter(e, idx)}
+                    />
+                  </div>
+                </div>
+                <div className="field">
+                  <p className="label">Crosses String</p>
+                  <div className="control">
+                    <input
+                      className="input"
+                      type="text"
+                      value={rst.crosses.string}
+                      name="crosses.string"
+                      placeholder="Wilson NXT"
+                      onChange={(e) => this.handleRstChange(e, idx)}
+                    />
+                  </div>
                 </div>
               </div>
-              <div className="field">
-                <p className="label">Crosses String</p>
-                <div className="control">
-                  <input
-                    className="input"
-                    type="text"
-                    value={rst.crosses.string}
-                    name="crosses.string"
-                    placeholder="Wilson NXT"
-                    onChange={(e) => this.handleRstChange(e, idx)}
-                  />
-                </div>
-              </div>
-            </div>
 
-            <div className="field-body">
-              <div className="field">
-                <label className="label">Main's Tension</label>
-                <div className="control">
-                  <input
-                    className="input"
-                    type="text"
-                    name="mains.tension"
-                    value={rst.mains.tension}
-                    placeholder="50"
-                    onChange={(e) => this.handleRstChange(e, idx)}
-                  />
+              <div className="field-body">
+                <div className="field">
+                  <label className="label">Main's Tension</label>
+                  <div className="control">
+                    <input
+                      className="input"
+                      type="text"
+                      name="mains.tension"
+                      value={rst.mains.tension}
+                      placeholder="50"
+                      onChange={(e) => this.handleRstChange(e, idx)}
+                      onKeyDown={(e) => this.handleTensionEnter(e, idx)}
+                    />
+                  </div>
+                </div>
+                <div className="field">
+                  <label className="label">Crosses Tension</label>
+                  <div className="control">
+                    <input
+                      className="input"
+                      type="text"
+                      name="crosses.tension"
+                      value={rst.crosses.tension}
+                      placeholder="55"
+                      onChange={(e) => this.handleRstChange(e, idx)}
+                    />
+                  </div>
                 </div>
               </div>
-              <div className="field">
-                <label className="label">Crosses Tension</label>
-                <div className="control">
-                  <input
-                    className="input"
-                    type="text"
-                    name="crosses.tension"
-                    value={rst.crosses.tension}
-                    placeholder="55"
-                    onChange={(e) => this.handleRstChange(e, idx)}
-                  />
-                </div>
-              </div>
+              <p className="control removeRacket">
+                <button
+                  type="button"
+                  onClick={(e) => this.removeRst(idx)}
+                  className="button is-danger"
+                >
+                  Remove Racket
+                </button>
+              </p>
             </div>
           </div>
-        </div>
+          <hr></hr>
+        </>
       );
     });
     return rstItems;
@@ -207,6 +252,14 @@ class RestringForm extends Component {
     let name = this.state.firstName + " " + this.state.lastName;
     return (
       <div>
+        <div class="notification is-success is-light">
+          <button class="delete"></button>
+          Primar lorem ipsum dolor sit amet, consectetur adipiscing elit lorem
+          ipsum dolor. <strong>Pellentesque risus mi</strong>, tempus quis
+          placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet
+          fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a>{" "}
+          efficitur. Sit amet, consectetur adipiscing elit
+        </div>
         <p className="subtitle">
           <b>New Restring Form </b>
         </p>
@@ -284,6 +337,7 @@ class RestringForm extends Component {
               </button>
             </p>
           </div>
+          <pre>{JSON.stringify(this.state, null, 2)} </pre>
         </form>
       </div>
     );

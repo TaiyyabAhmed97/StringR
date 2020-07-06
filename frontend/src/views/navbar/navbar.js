@@ -34,11 +34,11 @@ class Navbar extends React.Component {
         <div id="navbarBasicExample" class="navbar-menu">
           <div class="navbar-start">
             <Link class="navbar-item" to="/">
-              New Customer Form
+              New Customer
             </Link>
 
             <Link class="navbar-item" to="/usersearch">
-              Find User
+              Find Customer
             </Link>
 
             <div class="navbar-item has-dropdown is-hoverable">
