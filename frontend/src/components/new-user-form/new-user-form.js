@@ -50,6 +50,15 @@ class NewUserForm extends Component {
   render() {
     return (
       <div>
+        <div class="notification is-warning is-light">
+          <button class="delete"></button>
+          Primar lorem ipsum dolor sit amet, consectetur adipiscing elit lorem
+          ipsum dolor. <strong>Pellentesque risus mi</strong>, tempus quis
+          placerat ut, porta nec nulla. Vestibulum rhoncus ac ex sit amet
+          fringilla. Nullam gravida purus diam, et dictum <a>felis venenatis</a>{" "}
+          efficitur. Sit amet, consectetur adipiscing elit
+        </div>
+
         <p className="subtitle">New User Form</p>
         <form>
           <div className="field is-grouped">
@@ -61,6 +70,7 @@ class NewUserForm extends Component {
                   type="text"
                   name="fname"
                   placeholder="Alex"
+                  value={this.state.fname}
                   onChange={this.handleChange}
                 />
               </div>
@@ -73,6 +83,7 @@ class NewUserForm extends Component {
                   type="text"
                   name="lname"
                   placeholder="Smith"
+                  value={this.state.lname}
                   onChange={this.handleChange}
                 />
               </div>
@@ -86,6 +97,7 @@ class NewUserForm extends Component {
                 className="input"
                 type="text"
                 name="phoneNumber"
+                value={this.state.phoneNumber}
                 placeholder="e.g. 773-712-8894"
                 onChange={this.handleChange}
               />
