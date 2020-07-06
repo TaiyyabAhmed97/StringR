@@ -51,7 +51,7 @@ class FindUserForm extends Component {
   render() {
     return (
       <div>
-        <p className="subtitle">Find User Form</p>
+        <p className="subtitle">Find Customer Form</p>
         <form>
           <div className="field is-grouped">
             <div className="field">
