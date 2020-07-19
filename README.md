@@ -117,3 +117,5 @@
 
 - think through paginated fetch for every (x (need to determine what x will be)) number of stirng jobs to show in dashboard component
 - implement basic user auth (still need to do)
+
+commited tor eadme
