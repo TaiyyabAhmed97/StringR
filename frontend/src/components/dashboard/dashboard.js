@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 import "../dashboard/dashboard.css";
+import { devUrl } from "../../envVars";
 
 class Dashboard extends Component {
   constructor(props) {
@@ -13,7 +14,7 @@ class Dashboard extends Component {
     this.handleOnClick = this.handleOnClick.bind(this);
   }
   componentDidMount() {
-    axios.get("http://localhost:8000/api/stringjob").then((res) => {
+    axios.get(`${devUrl}/api/stringjob`).then((res) => {
       this.setState({
         stringjobs: res.data.data,
       });

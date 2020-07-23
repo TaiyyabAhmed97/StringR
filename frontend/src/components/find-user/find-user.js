@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./find-user.css";
 import { withRouter } from "react-router-dom";
+import { devUrl } from "../../envVars";
 class FindUserForm extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +23,7 @@ class FindUserForm extends Component {
   }
   handleSubmit(e) {
     axios
-      .get("http://localhost:8000/api/user/" + this.state.phoneNumber)
+      .get(`${devUrl}/api/user/` + this.state.phoneNumber)
       .then((res) => {
         this.setState(
           {

@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import axios from "axios";
 import "./new-user-form.css";
 import { Router, withRouter } from "react-router-dom";
+import { devUrl } from "../../envVars";
 class NewUserForm extends Component {
   constructor(props) {
     super(props);
@@ -31,7 +32,7 @@ class NewUserForm extends Component {
   handleSubmit(e) {
     e.preventDefault();
     axios
-      .post("http://localhost:8000/api/users", {
+      .post(`${devUrl}/api/users`, {
         firstName: this.state.fname,
         lastName: this.state.lname,
         phoneNumber: this.state.phoneNumber,

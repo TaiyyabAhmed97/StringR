@@ -5,6 +5,7 @@ import "../restring-form/restring-form.css";
 import "../confirm-restring.js/confirm-restring.css";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
+import { devUrl } from "../../envVars";
 
 class ConfirmRestring extends Component {
   constructor(props) {
@@ -53,7 +54,7 @@ class ConfirmRestring extends Component {
     console.log("in here");
     let { id } = this.state;
     axios
-      .post("http://localhost:8000/api/stringjob/done", {
+      .post(`${devUrl}/api/stringjob/done`, {
         id,
       })
       .then((res) => {

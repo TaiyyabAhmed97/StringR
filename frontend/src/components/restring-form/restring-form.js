@@ -4,6 +4,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import "../restring-form/restring-form.css";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
+import { devUrl } from "../../envVars";
 
 class RestringForm extends Component {
   constructor(props) {
@@ -49,7 +50,7 @@ class RestringForm extends Component {
   handleSubmit(e) {
     let { user, dropOffDate, dueDate, rst } = this.state;
     axios
-      .post("http://localhost:8000/api/stringjob", {
+      .post(`${devUrl}/api/stringjob`, {
         user,
         dueDate,
         rst,
