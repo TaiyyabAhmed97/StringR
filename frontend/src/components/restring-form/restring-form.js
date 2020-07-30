@@ -152,8 +152,9 @@ class RestringForm extends Component {
   removeRst(idx) {
     console.log(idx);
     let rstItems = [...this.state.rst];
-    let moddedRstItems = rstItems.splice(idx, 1);
-    this.setState({ rst: [...moddedRstItems] });
+    rstItems.splice(idx, 1);
+
+    this.setState({ rst: rstItems });
   }
   rstFormField() {
     const rstItems = this.state.rst.map((rst, idx) => {
