@@ -44,3 +44,17 @@ export const getUserByPhoneNum = async (req, res) => {
     return res.status(400).send({ error: e });
   }
 };
+
+export const getUsers = async (req, res) => {
+  try {
+    const users = await User.find({});
+    if (!users) {
+      console.log("something went wrong here");
+      return res.status(400).send({ data: "wrong" });
+    }
+    return res.status(201).send({ data: users });
+  } catch (e) {
+    console.log("error");
+    return res.status(400).send({ data: "wrong" });
+  }
+};
