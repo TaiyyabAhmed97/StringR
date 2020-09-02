@@ -4,7 +4,8 @@ import "./find-user.css";
 import { withRouter } from "react-router-dom";
 import { devUrl } from "../../envVars";
 import { getNumbers } from "../helpers/helpers";
-import Autocomplete from "../autocomplete/autocomplete";
+import Autocomplete from "react-autocomplete";
+
 class FindUserForm extends Component {
   constructor(props) {
     super(props);
@@ -16,6 +17,7 @@ class FindUserForm extends Component {
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+    this.handleSelect = this.handleSelect.bind(this);
   }
   componentDidMount() {
     getNumbers()
@@ -33,6 +35,11 @@ class FindUserForm extends Component {
     const name = e.target.name;
     this.setState({
       [name]: e.target.value,
+    });
+  }
+  handleSelect(str) {
+    this.setState({
+      phoneNumber: str,
     });
   }
   handleSubmit(e) {
@@ -64,32 +71,43 @@ class FindUserForm extends Component {
   }
 
   render() {
+    let inputProps = {
+      className: "input",
+      type: "text",
+      name: "phoneNumber",
+      placeholder: "e.g. 773-712-8894",
+    };
     return (
       <div>
         <p className="subtitle">Find Customer Form</p>
-        <Autocomplete text={this.state.phoneNumber}></Autocomplete>
         <form>
-          <div className="field is-grouped">
-            <div className="field">
-              <label className="label">Phone Number</label>
-              <div className="control">
-                <input
-                  className="input"
-                  type="text"
-                  name="phoneNumber"
-                  value={this.state.phoneNumber}
-                  placeholder="e.g. 773-712-8894"
-                  onChange={this.handleChange}
-                />
-              </div>
+          <label className="label">Phone Number</label>
+          <div className="field has-addons">
+            <div className="control">
+              <Autocomplete
+                items={this.state.phoneNumberList}
+                getItemValue={(item) => item}
+                renderItem={(item, isHighlighted) => (
+                  <div
+                    style={{
+                      background: isHighlighted ? "lightgray" : "white",
+                      padding: "5px",
+                      fontSize: "larger",
+                      border: "1px solid #ccc",
+                      borderRadius: "16px",
+                    }}
+                    key={Math.random()}
+                  >
+                    {item}
+                  </div>
+                )}
+                value={this.state.phoneNumber}
+                onChange={this.handleChange}
+                inputProps={inputProps}
+                onSelect={this.handleSelect}
+              ></Autocomplete>
             </div>
-            <div className="field">
-              <div className="control"></div>
-            </div>
-          </div>
-
-          <div className="field">
-            <p className="control">
+            <div className="control">
               <button
                 type="button"
                 onClick={this.handleSubmit}
@@ -97,7 +115,7 @@ class FindUserForm extends Component {
               >
                 Submit
               </button>
-            </p>
+            </div>
           </div>
 
           <pre>{JSON.stringify(this.state, null, 2)} </pre>
