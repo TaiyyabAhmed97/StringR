@@ -3,6 +3,8 @@ import axios from "axios";
 import "./find-user.css";
 import { withRouter } from "react-router-dom";
 import { devUrl } from "../../envVars";
+import { getNumbers } from "../helpers/helpers";
+import Autocomplete from "../autocomplete/autocomplete";
 class FindUserForm extends Component {
   constructor(props) {
     super(props);
@@ -10,9 +12,21 @@ class FindUserForm extends Component {
     this.state = {
       phoneNumber: "",
       user: {},
+      phoneNumberList: [],
     };
     this.handleChange = this.handleChange.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
+  }
+  componentDidMount() {
+    getNumbers()
+      .then((numbers) => {
+        this.setState({
+          phoneNumberList: [...numbers],
+        });
+      })
+      .catch((e) => {
+        console.log("e");
+      });
   }
 
   handleChange(e) {
@@ -53,6 +67,7 @@ class FindUserForm extends Component {
     return (
       <div>
         <p className="subtitle">Find Customer Form</p>
+        <Autocomplete text={this.state.phoneNumber}></Autocomplete>
         <form>
           <div className="field is-grouped">
             <div className="field">
@@ -62,6 +77,7 @@ class FindUserForm extends Component {
                   className="input"
                   type="text"
                   name="phoneNumber"
+                  value={this.state.phoneNumber}
                   placeholder="e.g. 773-712-8894"
                   onChange={this.handleChange}
                 />
