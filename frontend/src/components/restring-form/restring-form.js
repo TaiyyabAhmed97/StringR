@@ -5,12 +5,16 @@ import "../restring-form/restring-form.css";
 import { withRouter } from "react-router-dom";
 import axios from "axios";
 import { devUrl } from "../../envVars";
+import Autocomplete from "react-autocomplete";
+import { getStringsList } from "../helpers/helpers";
 
 class RestringForm extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
+      stringsList: {},
+      racketsList: [],
       user: "",
       firstName: "",
       lastName: "",
@@ -38,6 +42,16 @@ class RestringForm extends Component {
     this.handleTensionEnter = this.handleTensionEnter.bind(this);
   }
   componentDidMount() {
+    getStringsList()
+      .then((strings) => {
+        console.log(strings);
+        this.setState({
+          stringsList: strings,
+        });
+      })
+      .catch((e) => {
+        console.log(e);
+      });
     console.log(this.props.location.state);
     this.setState({
       user: this.props.location.state.user,
