@@ -26,8 +26,20 @@ export const getStringsList = async (req, res) => {
         strings.add(item.crosses.string);
       }
     }
-    return [...strings];
+    let rackets = getRacketsList(rstonlyArray);
+    let stringArray = [...strings];
+    return { stringArray, rackets };
   } catch (e) {
     console.error(e);
   }
+};
+
+const getRacketsList = (rsts) => {
+  let rackets = new Set();
+  for (let rst of rsts) {
+    for (let item of rst) {
+      rackets.add(item.racket);
+    }
+  }
+  return [...rackets];
 };

@@ -13,7 +13,7 @@ class RestringForm extends Component {
     super(props);
 
     this.state = {
-      stringsList: {},
+      stringsList: [],
       racketsList: [],
       user: "",
       firstName: "",
@@ -40,13 +40,18 @@ class RestringForm extends Component {
     this.handleCancel = this.handleCancel.bind(this);
     this.handleStringEnter = this.handleStringEnter.bind(this);
     this.handleTensionEnter = this.handleTensionEnter.bind(this);
+    this.newField = this.newField.bind(this);
+    this.handleSelectMains = this.handleSelectMains.bind(this);
+    this.handleSelectCrosses = this.handleSelectCrosses.bind(this);
+    this.handleSelectRacket = this.handleSelectRacket.bind(this);
   }
   componentDidMount() {
     getStringsList()
       .then((strings) => {
         console.log(strings);
         this.setState({
-          stringsList: strings,
+          stringsList: strings.stringArray,
+          racketsList: strings.rackets,
         });
       })
       .catch((e) => {
@@ -83,6 +88,37 @@ class RestringForm extends Component {
     const name = e.target.name;
     this.setState({
       [name]: e.target.value,
+    });
+  }
+  handleSelectCrosses(str, idx) {
+    console.log(" in handle select crosses with " + str);
+    const rstItems = [...this.state.rst];
+
+    let rstItem = { ...rstItems[idx] };
+    rstItem.crosses.string = str;
+    rstItems[idx] = rstItem;
+    this.setState({
+      rst: [...rstItems],
+    });
+  }
+  handleSelectMains(str, idx) {
+    const rstItems = [...this.state.rst];
+
+    let rstItem = { ...rstItems[idx] };
+    rstItem.mains.string = str;
+    rstItems[idx] = rstItem;
+    this.setState({
+      rst: [...rstItems],
+    });
+  }
+  handleSelectRacket(str, idx) {
+    const rstItems = [...this.state.rst];
+
+    let rstItem = { ...rstItems[idx] };
+    rstItem.racket = str;
+    rstItems[idx] = rstItem;
+    this.setState({
+      rst: [...rstItems],
     });
   }
   helper(obj, prop, val) {
@@ -170,7 +206,38 @@ class RestringForm extends Component {
 
     this.setState({ rst: rstItems });
   }
+  newField() {}
+
   rstFormField() {
+    const inputPropsMains = {
+      className: "input",
+      type: "text",
+      name: "mains.string",
+      placeholder: "RPM Blast",
+    };
+    const inputPropsCrosses = {
+      className: "input",
+      type: "text",
+      name: "crosses.string",
+      placeholder: "Wilson NXT",
+    };
+    const inputPropsRacket = {
+      className: "input",
+      type: "text",
+      name: "racket",
+      placeholder: "Wilson Blade 98",
+    };
+    const menuStyle = {
+      borderRadius: "3px",
+      boxShadow: "0 2px 12px rgba(0, 0, 0, 0.1)",
+      background: "rgba(255, 255, 255, 0.9)",
+      padding: "2px 0",
+      fontSize: "90%",
+      position: "fixed",
+      overflow: "auto",
+      maxHeight: "50%", // TODO: don't cheat, let it flow to the bottom
+      zIndex: 1,
+    };
     const rstItems = this.state.rst.map((rst, idx) => {
       return (
         <>
@@ -178,49 +245,66 @@ class RestringForm extends Component {
             <div className="field">
               <label className="label">Racket {idx + 1}</label>
               <div className="control">
-                <input
-                  className="input"
-                  type="text"
-                  name="racket"
+                <Autocomplete
+                  items={this.state.racketsList}
+                  getItemValue={(item) => item}
+                  renderItem={(item, isHighlighted) => (
+                    <div
+                      className="stringbox"
+                      style={{
+                        background: isHighlighted ? "lightgray" : "white",
+                        padding: "5px",
+                        fontSize: "larger",
+                        border: "1px solid #ccc",
+                        borderRadius: "16px",
+                        position: "relative",
+                      }}
+                      key={Math.random()}
+                    >
+                      {item}
+                    </div>
+                  )}
                   value={rst.racket}
-                  placeholder="Wilson Pro Staff 97"
                   onChange={(e) => this.handleRstChange(e, idx)}
-                />
+                  onSelect={(str) => this.handleSelectRacket(str, idx)}
+                  inputProps={inputPropsRacket}
+                  menuStyle={menuStyle}
+                ></Autocomplete>
               </div>
               <div className="field-body">
-                <div className="field">
+                <div className="field minContentBox">
                   <p className="label">Mains String</p>
                   <div className="control">
-                    <input
-                      className="input"
-                      type="text"
+                    <Autocomplete
+                      items={this.state.stringsList}
+                      getItemValue={(item) => item}
+                      renderItem={(item, isHighlighted) => (
+                        <div
+                          className="stringbox"
+                          style={{
+                            background: isHighlighted ? "lightgray" : "white",
+                            padding: "5px",
+                            fontSize: "larger",
+                            border: "1px solid #ccc",
+                            borderRadius: "16px",
+                            position: "relative",
+                          }}
+                          key={Math.random()}
+                        >
+                          {item}
+                        </div>
+                      )}
                       value={rst.mains.string}
-                      name="mains.string"
-                      placeholder="RPM Blast"
                       onChange={(e) => this.handleRstChange(e, idx)}
-                      onKeyDown={(e) => this.handleStringEnter(e, idx)}
-                    />
+                      onSelect={(str) => this.handleSelectMains(str, idx)}
+                      inputProps={inputPropsMains}
+                      menuStyle={menuStyle}
+                    ></Autocomplete>
                   </div>
                 </div>
-                <div className="field">
-                  <p className="label">Crosses String</p>
-                  <div className="control">
-                    <input
-                      className="input"
-                      type="text"
-                      value={rst.crosses.string}
-                      name="crosses.string"
-                      placeholder="Wilson NXT"
-                      onChange={(e) => this.handleRstChange(e, idx)}
-                    />
-                  </div>
-                </div>
-              </div>
-
-              <div className="field-body">
-                <div className="field">
-                  <label className="label">Main's Tension</label>
-                  <div className="control">
+                <div className="field tensionBox">
+                  <label className="label">Tension</label>
+                  <div className="control tension">
                     <input
                       className="input"
                       type="text"
@@ -232,9 +316,40 @@ class RestringForm extends Component {
                     />
                   </div>
                 </div>
-                <div className="field">
-                  <label className="label">Crosses Tension</label>
+                <div className="field minContentBox">
+                  <p className="label">Crosses String</p>
                   <div className="control">
+                    <Autocomplete
+                      items={this.state.stringsList}
+                      getItemValue={(item) => item}
+                      renderItem={(item, isHighlighted) => (
+                        <div
+                          className="stringbox"
+                          style={{
+                            background: isHighlighted ? "lightgray" : "white",
+                            padding: "5px",
+                            fontSize: "larger",
+                            border: "1px solid #ccc",
+                            borderRadius: "16px",
+                            zIndex: "1",
+                            position: "relative",
+                          }}
+                          key={Math.random()}
+                        >
+                          {item}
+                        </div>
+                      )}
+                      value={rst.crosses.string}
+                      onChange={(e) => this.handleRstChange(e, idx)}
+                      onSelect={(str) => this.handleSelectCrosses(str, idx)}
+                      inputProps={inputPropsCrosses}
+                      menuStyle={menuStyle}
+                    ></Autocomplete>
+                  </div>
+                </div>
+                <div className="field tensionBox">
+                  <label className="label">Tension</label>
+                  <div className="control tension">
                     <input
                       className="input"
                       type="text"
@@ -246,6 +361,7 @@ class RestringForm extends Component {
                   </div>
                 </div>
               </div>
+
               <p className="control removeRacket">
                 <button
                   type="button"
@@ -321,7 +437,7 @@ class RestringForm extends Component {
               </div>
             </div>
           </div>
-
+          {this.newField()}
           {this.rstFormField()}
           <div className="field is-grouped">
             <p className="control">
