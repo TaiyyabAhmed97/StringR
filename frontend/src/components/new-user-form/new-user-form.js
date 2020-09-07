@@ -93,7 +93,7 @@ class NewUserForm extends Component {
 
           <div className="field">
             <label className="label">Phone Number</label>
-            <div className="control">
+            <div className="control fitContent">
               <input
                 className="input"
                 type="text"
