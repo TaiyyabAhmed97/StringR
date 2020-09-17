@@ -1,16 +1,12 @@
-import redis from 'redis'
-import connect from '../src/db'
-import express from 'express'
-import { json, urlencoded } from 'body-parser'
-import morgan from 'morgan'
-import cors from 'cors'
-import path from 'path'
-import userRoutes from '../src/resources/user/user.router'
-import stringJobRoutes from '../src/resources/stringjob/stringjob.router'
-
-
-
-
+import redis from "redis";
+import connect from "../src/db";
+import express from "express";
+import { json, urlencoded } from "body-parser";
+import morgan from "morgan";
+import cors from "cors";
+import path from "path";
+import userRoutes from "../src/resources/user/user.router";
+import stringJobRoutes from "../src/resources/stringjob/stringjob.router";
 
 /**
  * @initialize redis client
@@ -26,21 +22,21 @@ client.on('error', (err) => {
 })
  */
 // init express server and mongo server
-const PORT = 8000
+const PORT = 8000;
 const app = express();
-app.use(json())
-app.use(cors())
-app.use(morgan('dev'))
-app.use(urlencoded({ extended: true }))
-app.use('/api', userRoutes)
-app.use('/api', stringJobRoutes)
+app.use(json());
+app.use(cors());
+app.use(morgan("dev"));
+app.use(urlencoded({ extended: true }));
+app.use("/api", userRoutes);
+app.use("/api", stringJobRoutes);
 
-
+//app.use(express.static(path.join(__dirname, "../../frontend/build")));
 connect()
-    .then(() => {
-        console.log('MongoDB connected successfully')
-        app.listen(PORT, () => {
-            console.log(`Server is running on PORT:${PORT}`)
-        })
-    })
-    .catch(e => console.error(e))
+  .then(() => {
+    console.log("MongoDB connected successfully");
+    app.listen(PORT, () => {
+      console.log(`Server is running on PORT:${PORT}`);
+    });
+  })
+  .catch((e) => console.error(e));
