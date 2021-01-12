@@ -8,6 +8,8 @@ import Dashboard from "./components/dashboard/dashboard";
 import ConfirmRestring from "./components/confirm-restring.js/confirm-restring";
 import Navbar from "./views/navbar/navbar";
 import FindUser from "./components/find-user/find-user";
+import { Login } from "./components/login/login";
+import { Register } from "./register/register";
 export default function App() {
   return (
     <>
@@ -16,8 +18,15 @@ export default function App() {
         <div className="container">
           <section className="section">
             <Switch>
+
               <Route path="/usersearch">
                 <FindUser></FindUser>
+              </Route>
+              <Route path="/register">
+                <Register></Register>
+              </Route>
+              <Route path="/login">
+                <Login></Login>
               </Route>
               <Route path="/restring">
                 <RestringForm></RestringForm>
@@ -35,26 +44,9 @@ export default function App() {
           </section>
         </div>
       </Router>
-
-      <section className="section">
-        <footer className="footer">
-          <div className="container">
-            <div className="content has-text-centered">
-              <p>
-                <strong>Bulma</strong> by{" "}
-                <a href="https://jgthms.com">Jeremy Thomas</a>. The source code
-                is licensed
-                <a href="http://opensource.org/licenses/mit-license.php">MIT</a>
-                . The website content is licensed{" "}
-                <a href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
-                  CC BY NC SA 4.0
-                </a>
-                .
-              </p>
-            </div>
-          </div>
-        </footer>
-      </section>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </head>
     </>
   );
 }

@@ -7,6 +7,7 @@ import cors from "cors";
 import path from "path";
 import userRoutes from "../src/resources/user/user.router";
 import stringJobRoutes from "../src/resources/stringjob/stringjob.router";
+import shopRoutes from "../src/resources/shop/shop.router"
 
 /**
  * @initialize redis client
@@ -30,7 +31,7 @@ app.use(morgan("dev"));
 app.use(urlencoded({ extended: true }));
 app.use("/api", userRoutes);
 app.use("/api", stringJobRoutes);
-
+app.use("/api", shopRoutes);
 //app.use(express.static(path.join(__dirname, "../../frontend/build")));
 connect()
   .then(() => {
