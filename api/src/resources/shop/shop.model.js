@@ -8,13 +8,13 @@ let shop = new Schema({
     type: String,
     required: true,
   },
-  firstName: {
+  name: {
     type: String,
     required: true,
   },
-  lastName: {
+  phoneNumber: {
     type: String,
-    required: true,
+    required: true
   },
   password: {
     type: String,
@@ -31,4 +31,4 @@ shop.methods.generateHash = function (password) {
 shop.methods.validPassword = function (password) {
   return bcrypt.compareSync(password, this.password);
 };
-export const User = mongoose.model("shop", shop);
+export const Shop = mongoose.model("shop", shop);
