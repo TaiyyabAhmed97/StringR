@@ -1,0 +1,29 @@
+version: '3.7'
+
+services:
+  server:
+    container_name: todo-server
+    restart: always
+    build: ./api
+    ports:
+      - '8000:8000'
+    volumes:
+      - ./api:/usr/src/app/server
+    links:
+      - mongo
+  client:
+    container_name: todo-client
+    restart: always
+    build: ./frontend
+    tty: true
+    volumes:
+      - ./frontend:/usr/src/app/client
+      - /usr/src/app/client/node_modules/
+    ports:
+      - '3000:3000'
+  mongo:
+    hostname: mongo
+    restart: always
+    image: mongo
+    ports:
+      - '27017:27017'
